@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Cipher SignUp</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" href="{% static 'images/icons/eagle.png' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/animsition/css/animsition.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/daterangepicker/daterangepicker.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+</head>
+
+<body>
+	{% if messages %}
+		{% for message in messages %}
+		<script>
+			alert('{{message}}')
+		</script>
+		{% endfor %}
+	{% endif %}
+
+	<script type="text/javascript">
+		function checkForm(form)	{
+		  if(form.pass.value != form.pass_2.value) {
+			alert("Passwords do no match !");
+			return false;
+		  }
+		  if(form.firstname.value==''||form.lastname.value==''||form.username.value==''||form.mailid.value==''||form.dob.value==''||form.pass.value==''||form.pass_2.value=='') {
+			alert("Please fillout the  details !");
+			return false;
+		  }
+		  return true;
+		}
+		function showPass() {
+			var x = document.getElementById("myInput");
+			var y = document.getElementById("myInput2");
+			if (x.type === "password" && y.type === "password") {
+			  x.type = "text";
+			  y.type = "text";
+			} else {
+			  x.type = "password";
+			  y.type = "password";
+			}
+		}
+	</script>
+
+	<div class="container-login100" style="background-image: url('static/images/dark_bg.jpg');">
+		<div class="wrap-login100 p-l-55 p-r-55 p-t-70 p-b-30">
+			<form class="login100-form validate-form" method='post' action='Home' onsubmit="return checkForm(this);">
+				{% csrf_token %}
+				<span class="login100-form-title p-b-25">
+					-x- CIPHER -x-
+				</span>
+				<span class="login100-form-title p-b-32">
+					Sign Up
+				</span>
+                <div class="wrap-input100 validate-input m-b-20" data-validate="Enter First Name !">
+					<input class="input100" type="text" name="firstname" placeholder="First Name">
+					<span class="focus-input100"></span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-20" data-validate="Enter Last Name !">
+					<input class="input100" type="text" name="lastname" placeholder="Last Name">
+					<span class="focus-input100"></span>
+                </div>
+				<div class="wrap-input100 validate-input m-b-20" data-validate="Enter Username !">
+					<input class="input100" type="text" name="username" placeholder="Username">
+					<span class="focus-input100"></span>
+				</div>
+                <div class="wrap-input100 validate-input m-b-20" data-validate="Enter Email ID !">
+					<input class="input100" type="text" name="mailid" placeholder="Email ID">
+					<span class="focus-input100"></span>
+				</div>
+                <div class="wrap-input100 validate-input m-b-20" data-validate="Enter Date of Birth !">
+					<input class="input100" type="date" name="dob" placeholder="Date of Birth">
+					<span class="focus-input100"></span>
+				</div>
+				<div class="wrap-input100 validate-input m-b-25" data-validate = "Enter Password !">
+					<input class="input100" id="myInput" type="password" name="pass" placeholder="Password">
+					<span class="focus-input100"></span>
+				</div>
+				
+				<div class="wrap-input100 validate-input m-b-25" data-validate = "Confirm Password !">
+					<input class="input100" id="myInput2" type="password" name="pass_2" placeholder="Confirm Password">
+					<span class="focus-input100"></span>
+				</div>
+				<div class="wrap-input100 validate-input m-b-25" data-validate = "Confirm Password !">
+					<input type="checkbox" onclick="showPass()"> Show Password
+				</div>
+				<div class="wrap-input100 validate-input m-b-20" data-validate="Type about yourself">
+					<textarea class = "input100" name = "desc" rows = 5  cols="35" placeholder = "About Yourself.."></textarea>
+					<span class="focus-input100"></span>
+				</div>
+				<div class="container-login100-form-btn">
+					<button class="login100-form-btn">
+						Sign Up
+					</button>
+				</div>
+		</div>
+	</div>
+
+	<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+	<script src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+	<script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+	<script src="{% static 'vendor/daterangepicker/moment.min.js' %}"></script>
+	<script src="{% static 'vendor/daterangepicker/daterangepicker.js' %}"></script>
+	<script src="{% static 'vendor/countdowntime/countdowntime.js' %}"></script>
+	<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

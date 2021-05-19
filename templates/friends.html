@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cipher Friends</title>
+    <link rel="icon" type="image/png" href="{% static 'images/icons/eagle.png' %}"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">
+    <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/magnific-popup.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'slick/slick.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'slick/slick-theme.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/tooplate-style.css' %}">
+    <style>
+        body {
+          font-size: 60%;
+          background: #00abb7;
+        }
+        .container {
+          padding: 15px 32px;
+        }
+        button,
+        button::after {
+          -webkit-transition: all 0.3s;
+          -moz-transition: all 0.3s;
+          -o-transition: all 0.3s;
+          transition: all 0.3s;
+        }
+        button {
+            background: none;
+            border: 1px solid #fff;
+            border-radius: 10px;
+            color: #fff;
+            display: block;
+            font-size: 11px;
+            font-weight: bold;
+            margin: 4px 2px;
+            padding: 10px 20px;
+            text-align: right;
+        }
+        button::before,
+        button::after {
+          background: #fff;
+          content: '';
+          position: relative;
+          z-index: -1;
+        }
+        button:hover {
+          color: #29f2e4;
+        }
+        .button1::after {
+            height: 0;
+            left: 0;
+            top: 0;
+            width: 100%;
+          }
+          .button1:hover:after {
+            height: 100%;
+          }
+        </style>
+</head>
+
+<body style ="background-image: url('static/images/dark_forest.jpg');">
+    <br><br>
+    <div style = "text-align : center;">
+        <header class="mb-4"><h1 class="tm-text-shadow">Welcome {{use.first_name}} {{use.last_name}} !</h1></header>
+    </div>
+    <br>
+    <div style = "text-align : left;"></div>
+        <div class="ml-auto">
+                <div class="mb-5 tm-font-big">
+                    <div class="media">
+                        <div class="media-body">
+                            <h3>Other Users</h3>
+                            {% if friends|length != all|length %}
+                                {% for user in users %}
+                                    <div>
+                                        <form action='change_friends' method="post" class="txt2 hov1">
+                                            {% csrf_token %}
+                                            <input type="text" name="user" value="{{use.username}}" hidden>
+                                            <input type="text" name="operation" value="add" hidden>
+                                            <input type="text" name="uid" value="{{user}}" hidden>
+                                            <p>{{user}} </p>
+                                            <button type="submit">Follow</button>
+                                        </form>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <div>
+                                    <p>All users are now your friends...</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <br>
+                    <div>
+                        <h3>Your Friends</h3>
+                        {% if friends %}
+                            {% for friend in friends %}
+                                <div>
+                                    <form action='change_friends' method="post" class="txt2 hov1">
+                                        {% csrf_token %}
+                                        <input type="text" name="user" value="{{use.username}}" hidden>
+                                        <input type="text" name="operation" value="remove" hidden>
+                                        <input type="text" name="uid" value="{{friend.right_user}}" hidden>
+                                        <p>{{friend.right_user}} </p>
+                                        <button type="submit">Unfollow</button>
+                                    </form>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div>
+                                <p>No friends yet ! Go get some friends...</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+        </div>
+    </div>
+    <footer class="footer-link">
+        <form action="return" method="post" class="txt2 hov1">
+            {% csrf_token %}
+            <input type="text" name="log_user" value="{{use.username}}" hidden>
+            <button type="submit" class="btn tm-btn-submit tm-btn ml-auto">Go To Home</button>
+        </form>
+    </footer>
+</body>
+</html>
