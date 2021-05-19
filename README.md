@@ -15,16 +15,16 @@ Reference: [https://dev.mysql.com/doc/refman/5.5/en/](https://dev.mysql.com/doc/
 #### 3. Setup virtual environment
 ```bash
 # Install virtual environment
-sudo pip install virtualenv
+pip install virtualenvwrapper -win
 
-# Make a directory
-mkdir envs
-
-# Create virtual environment
-virtualenv ./envs/
+# Make a virtual environment
+mkvirtualenv environmentname
 
 # Activate virtual environment
-source envs/bin/activate
+workon environmentname
+
+# Deactivate virtual environment
+deactivate
 ```
 
 #### 4. Clone git repository
@@ -38,10 +38,17 @@ cd cipher/
 pip install -r requirements.txt
 ```
 
-#### 6. Edit project settings
+#### 6. Create database and tables
+```bash
+# Open MySQL commandline
+# Create database
+create database cipher
+```
+
+#### 7. Edit project settings
 ```bash
 # open settings file
-vim cipher/settings.py
+ cipher/settings.py
 
 # Edit Database configurations with your MySQL configurations.
 # Search for DATABASES section.
@@ -58,7 +65,7 @@ DATABASES = {
 
 # save the file
 ```
-#### 7. Run the server
+#### 8. Run the server
 ```bash
 # Make migrations
 python manage.py makemigrations
