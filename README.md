@@ -22,9 +22,6 @@ mkvirtualenv environmentname
 
 # Activate virtual environment
 workon environmentname
-
-# Deactivate virtual environment
-deactivate
 ```
 
 #### 4. Clone git repository
